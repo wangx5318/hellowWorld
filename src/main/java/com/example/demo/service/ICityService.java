@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Country;
+import com.example.demo.entity.City;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author wangx
+ * @author cdd
  * @since 2021-04-12
  */
-public interface CountryService extends IService<Country> {
+public interface ICityService extends IService<City> {
 
 }

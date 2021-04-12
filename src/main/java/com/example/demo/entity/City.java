@@ -6,15 +6,21 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author wangx
+ * @author cdd
  * @since 2021-04-12
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value="City对象", description="")
 public class City implements Serializable {
 
@@ -40,50 +46,5 @@ public class City implements Serializable {
     @TableField("Population")
     private Integer Population;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-    public String getCountryCode() {
-        return CountryCode;
-    }
-
-    public void setCountryCode(String CountryCode) {
-        this.CountryCode = CountryCode;
-    }
-    public String getDistrict() {
-        return District;
-    }
-
-    public void setDistrict(String District) {
-        this.District = District;
-    }
-    public Integer getPopulation() {
-        return Population;
-    }
-
-    public void setPopulation(Integer Population) {
-        this.Population = Population;
-    }
-
-    @Override
-    public String toString() {
-        return "City{" +
-            "id=" + id +
-            ", Name=" + Name +
-            ", CountryCode=" + CountryCode +
-            ", District=" + District +
-            ", Population=" + Population +
-        "}";
-    }
 }

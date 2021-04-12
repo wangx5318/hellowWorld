@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  *  Mapper 接口
  * </p>
  *
- * @author wangx
+ * @author cdd
  * @since 2021-04-12
  */
 public interface CityMapper extends BaseMapper<City> {

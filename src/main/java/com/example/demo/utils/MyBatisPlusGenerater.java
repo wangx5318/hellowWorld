@@ -16,9 +16,6 @@ import java.util.Scanner;
 
 /**
  * @Description 代码生成器工具类
- * @Author cdd
- * @Date  2020/6/4
- * @Vesrion v1.0
  **/
 public class MyBatisPlusGenerater {
 

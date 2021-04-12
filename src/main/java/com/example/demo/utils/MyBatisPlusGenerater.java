@@ -16,7 +16,6 @@ import java.util.Scanner;
 
 /**
  * @Description 代码生成器工具类
- *    详细可参考官方文档：https://mp.baomidou.com/guide/generator.html#%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B
  * @Author cdd
  * @Date  2020/6/4
  * @Vesrion v1.0
@@ -26,6 +25,9 @@ public class MyBatisPlusGenerater {
     public static final String DB_URL = "jdbc:mysql://localhost:3306/world?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC";
     public static final String DB_DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     public static final String BASE_PACKAGE_PATH = "com.example.demo";
+    public static final String AUTHOR = "wangx";
+    public static final String USER_NAME = "root";
+    public static final String PASS_WORD = "123456";
 
     /**
      * Description: 窗口获取信息
@@ -61,7 +63,7 @@ public class MyBatisPlusGenerater {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");  // 获取当前项目路径
         gc.setOutputDir(projectPath + "/src/main/java");      // 设置基础包路径
-        gc.setAuthor("cdd");                                  // Mapper,Service等类注解中显示创建人信息
+        gc.setAuthor(AUTHOR);                                  // Mapper,Service等类注解中显示创建人信息
         gc.setOpen(false);                                    // 文件生成完毕后，是否需要打开所在路径
         gc.setSwagger2(true);                                 // 实体属性 Swagger2 注解
 //        gc.setBaseColumnList(true);                         // 在Mapper.xml文件中是否生成公用SQL代码段
@@ -73,8 +75,8 @@ public class MyBatisPlusGenerater {
         dsc.setUrl(MyBatisPlusGenerater.DB_URL);
         // dsc.setSchemaName("public");
         dsc.setDriverName(MyBatisPlusGenerater.DB_DRIVER_NAME);
-        dsc.setUsername("root");
-        dsc.setPassword("123456");
+        dsc.setUsername(USER_NAME);
+        dsc.setPassword(PASS_WORD);
         mpg.setDataSource(dsc);
 
         // 包配置

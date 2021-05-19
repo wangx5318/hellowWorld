@@ -15,9 +15,20 @@ spring:
     serialization:
       write-dates-as-timestamps: false
 
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true
-    auto-mapping-behavior: full
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  mybatis-plus:
+    configuration:
+      map-underscore-to-camel-case: true
+      auto-mapping-behavior: full
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath*:mapper/**/*Mapper.xml
+
+  redis:
+    host: localhost
+    password:
+    port: 6379
+    timeout: 20000 #超时连接
+    jedis:
+      pool:
+        max-idle: 6 #最大空闲数
+        max-active: 10 #最大连接数
+        min-idle: 2 #最小空闲数

@@ -39,7 +39,7 @@ public class CityController {
     public String redisTest(){
         Jedis jedis = new Jedis("localhost",6379);
         jedis.set("b", "阿斯顿");
-        return jedis.get("a");
+        return jedis.get("b");
     }
 
 }

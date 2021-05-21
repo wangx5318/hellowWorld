@@ -38,6 +38,7 @@ public class CityController {
     @GetMapping("/redisTest")
     public String redisTest(){
         Jedis jedis = new Jedis("localhost",6379);
+        jedis.set("b", "阿斯顿");
         return jedis.get("a");
     }
 

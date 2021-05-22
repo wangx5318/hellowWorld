@@ -2,7 +2,6 @@ package com.example.demo.utils;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -24,7 +23,7 @@ public class MyBatisPlusGenerater {
     public static final String BASE_PACKAGE_PATH = "com.example.demo";
     public static final String AUTHOR = "wangx";
     public static final String USER_NAME = "root";
-    public static final String PASS_WORD = "123456";
+    public static final String PASS_WORD = "root";
 
     /**
      * Description: 窗口获取信息
@@ -39,7 +38,7 @@ public class MyBatisPlusGenerater {
         System.out.println(help.toString());
         if (scanner.hasNext()) {
             String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
+            if ( null != ipt && !"".equals(ipt)) {
                 return ipt;
             }
         }

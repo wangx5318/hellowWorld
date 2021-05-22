@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.City;
 import com.example.demo.mapper.CityMapper;
 import com.example.demo.service.ICityService;
@@ -21,8 +23,11 @@ import java.util.List;
 public class CityServiceImpl extends ServiceImpl<CityMapper, City> implements ICityService {
 
     @Override
-    public List<City> findCity() {
+    public IPage<City> findCity(City city) {
         QueryWrapper<City> query = new QueryWrapper<>();
-        return baseMapper.selectList(query);
+        query.eq("CountryCode", city.getCountryCode());
+        Page<City> page = new Page<>();
+        IPage<City> iPage = baseMapper.selectPage(page, query);
+        return iPage;
     }
 }

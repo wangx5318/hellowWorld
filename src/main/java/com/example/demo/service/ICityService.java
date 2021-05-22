@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.demo.entity.City;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -15,5 +16,5 @@ import java.util.List;
  */
 public interface ICityService extends IService<City> {
 
-    List<City> findCity();
+    IPage<City> findCity(City city);
 }

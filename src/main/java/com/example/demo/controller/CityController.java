@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.demo.entity.City;
 import com.example.demo.service.ICityService;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
 import java.util.List;
@@ -23,18 +22,23 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/city")
+@Api(tags = "城市接口")
 public class CityController {
 
     @Autowired
     private ICityService cityService;
 
-    @ApiModelProperty("查找城市")
-    @GetMapping("/findCity")
-    public List<City> findCity(){
-        return cityService.findCity();
+    @ApiOperation(value = "查找城市",notes = "注意事项",httpMethod = "POST", response = City.class)
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "countryCode", value = "国家代码", required = true)
+//    }
+//    )
+    @PostMapping("/findCity")
+    public IPage<City> findCity(@RequestBody City city){
+        return cityService.findCity(city);
     }
 
-    @ApiModelProperty("redis测试")
+    @ApiOperation("redis测试")
     @GetMapping("/redisTest")
     public String redisTest(){
         Jedis jedis = new Jedis("localhost",6379);

@@ -16,47 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import java.util.List;
 
 
 /**
@@ -89,7 +49,7 @@ public class UserController {
 
     @ApiOperation(value = "查询用户",notes = "无注意事项",httpMethod = "POST")
     @PostMapping("/selectUser")
-    public IPage selectUser(@RequestBody User user){
+    public List<User> selectUser(@RequestBody User user){
         return userService.selectUser(user);
     }
 

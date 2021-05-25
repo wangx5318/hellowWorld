@@ -6,6 +6,8 @@ import com.example.demo.common.BuniessException;
 import com.example.demo.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -18,5 +20,5 @@ public interface IUserService extends IService<User> {
 
     void addUser(User user) throws BuniessException;
 
-    IPage selectUser(User user);
+    List<User> selectUser(User user);
 }

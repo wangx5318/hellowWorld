@@ -11,6 +11,9 @@ import com.example.demo.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import freemarker.template.utility.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * <p>
@@ -32,12 +35,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public IPage selectUser(User user) {
+    public List<User> selectUser(@RequestBody User user) {
         QueryWrapper<User> query = new QueryWrapper<>();
-        Page page = new Page();
         if(StringUtils.isNotEmpty(user.getName())){
             query.like("name", user.getName());
         }
-        return baseMapper.selectPage(page, query);
+        return baseMapper.selectList(query);
     }
 }

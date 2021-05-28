@@ -29,16 +29,22 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //判断账号
         if(!Objects.equals(username,"wx")){
             throw new UsernameNotFoundException("账号密码错误");
         }
 
+        // 权限集合
         ArrayList<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(){
             {
                 add(new SimpleGrantedAuthority("admin"));
                 add(new SimpleGrantedAuthority("finance"));
             }
         };
+
+        System.out.println("#####myUserDetaiService--->loadUserByUsername");
+
+        //返回User对象
         return new MyUser().setUsername(username)
                 .setPassword(bCryptPasswordEncoder.encode("123"))
                 .setAuthorities(grantedAuthorities);

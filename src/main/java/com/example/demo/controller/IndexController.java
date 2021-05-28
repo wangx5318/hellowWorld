@@ -5,9 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Objects;
 
@@ -16,7 +20,7 @@ import java.util.Objects;
  * @author: scott
  * @date: 2021-05-26 15:32
  */
-@RestController
+@Controller
 @RequestMapping("/index")
 public class IndexController {
 
@@ -32,24 +36,36 @@ public class IndexController {
     }
 
     @GetMapping("/wx")
+    @ResponseBody
     public String wx(){
         setValToRedis();
         return "hello wx sb ！";
     }
 
     @GetMapping("/sb")
+    @ResponseBody
     @PreAuthorize("@ss.hasPermissions('admin')")
     public String sb(){
         String val = getValToRedis();
         if(Objects.isNull(val)){
             setValToRedis();
         }
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "hello sb = " + getValToRedis();
     }
 
     @GetMapping("/engineer")
+    @ResponseBody
     @PreAuthorize("@ss.hasPermissions('engineer')")
     public String login(){
         return "hello engineer!";
     }
+
+    @RequestMapping("/index")
+    public String index(){
+        System.out.println("222222222222222222222222222222222222222222222222222222222222222");
+        return "/a/index";
+    }
+
+
 }

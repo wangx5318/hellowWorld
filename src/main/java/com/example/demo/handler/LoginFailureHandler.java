@@ -1,5 +1,8 @@
 package com.example.demo.handler;
 
+import cn.hutool.json.JSONUtil;
+import com.example.demo.entity.ResultVo;
+import com.example.demo.enum2.HttpStatusEnum;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -20,6 +23,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        httpServletResponse.getWriter().write("登录失败！！！");
+
+        httpServletResponse.getWriter().write(JSONUtil.toJsonStr(ResultVo.fail()));
+        httpServletResponse.sendError(HttpStatusEnum.INTERNAL_SERVER_ERROR.getCode(),HttpStatusEnum.INTERNAL_SERVER_ERROR.getMessage());
+//        httpServletResponse.sendRedirect("/login");
     }
 }

@@ -15,6 +15,14 @@ spring:
     serialization:
       write-dates-as-timestamps: false
 
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    cache: false
+    mode: HTML5
+
   mybatis-plus:
     configuration:
       map-underscore-to-camel-case: true
@@ -32,3 +40,15 @@ spring:
         max-idle: 6 #最大空闲数
         max-active: 10 #最大连接数
         min-idle: 2 #最小空闲数
+
+
+
+
+
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  #token有效期一天
+  expiration: 86400
+  tokenHead: "Bearer "

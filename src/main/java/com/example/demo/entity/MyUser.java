@@ -5,6 +5,7 @@ import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
 /**
@@ -18,8 +19,10 @@ public class MyUser implements UserDetails {
 
     private Long id;
 
+    @NotBlank(message = "账号不能为空！")
     private String username;
 
+    @NotBlank(message = "密码不能为空！")
     private String password;
 
     private Integer sex;

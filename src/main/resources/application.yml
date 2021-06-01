@@ -23,6 +23,7 @@ spring:
     cache: false
     mode: HTML5
 
+
   mybatis-plus:
     configuration:
       map-underscore-to-camel-case: true
@@ -40,6 +41,17 @@ spring:
         max-idle: 6 #最大空闲数
         max-active: 10 #最大连接数
         min-idle: 2 #最小空闲数
+  mail:
+    host: smtp.qq.com
+    username: 424253536@qq.com
+    password: lzlxxfupzfsybheh
+    port: 587
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+          debug: true
 
 
 

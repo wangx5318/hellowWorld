@@ -48,7 +48,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //忽略静态文件
-        web.ignoring().antMatchers("/a/**","/*.html","/**/*.html","/css/**","/img/**");
+        web.ignoring().antMatchers("/a/**","/*.html","/**/*.html","/css/**","/js/**","/font/**","/images/**","/plugins/**","/bundles/**","/video/**");
     }
 
     @Override
@@ -59,13 +59,15 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(myAuthenticationEntryPoint)//自定义异常处理器
                 .and()
                 .authorizeRequests()
-                .antMatchers("/home","/index","/loginn")//忽略请求路径，不需要认证
+                .antMatchers("/index","/loginn","/signup","/creatUser")//忽略请求路径，不需要认证
                 .permitAll()
                 .anyRequest()
                 .authenticated()//除了上面忽略得，所有请求都要认证
         .and()
         .formLogin()
-                .defaultSuccessUrl("/index/sb",true);//登录成功后跳转页面
+                .defaultSuccessUrl("/index/sb",true)//登录成功后跳转页面
+        .and().logout()
+                .logoutSuccessUrl("/home");
 //        .successHandler(loginSucessHandler)
 //        .failureHandler(loginFailureHandler);//登录失败处理器
 

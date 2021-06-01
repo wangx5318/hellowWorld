@@ -2,7 +2,9 @@ package com.example.demo.utils;
 
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +17,8 @@ public class RedisUtil {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     public String getStringValByKey(String key){
         return stringRedisTemplate.opsForValue().get(key);
@@ -26,6 +30,11 @@ public class RedisUtil {
 
     public void delStringVal(String key){
         stringRedisTemplate.delete(key);
+    }
+
+    public Long IncrementNum(String key){
+        RedisAtomicLong entityIdCounter = new RedisAtomicLong(key, redisTemplate.getConnectionFactory());
+        return entityIdCounter.getAndIncrement();
     }
 
 }

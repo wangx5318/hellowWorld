@@ -42,8 +42,6 @@ public class MyUserDetailService implements UserDetailsService {
             }
         };
 
-        System.out.println("#####myUserDetaiService--->loadUserByUsername");
-
         //返回User对象
         return new MyUser().setUsername(username)
                 .setPassword(bCryptPasswordEncoder.encode("123"))

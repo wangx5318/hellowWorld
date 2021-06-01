@@ -5,6 +5,7 @@ import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
@@ -26,6 +27,14 @@ public class MyUser implements UserDetails {
     private String password;
 
     private Integer sex;
+
+    @Email
+    @NotBlank(message = "邮箱不能为空！")
+    private String email;
+
+    private String password2;
+
+    private boolean agree;
 
     private Collection<? extends GrantedAuthority> authorities;
 

@@ -2,9 +2,14 @@ package com.example.demo.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import com.example.demo.entity.MyUser;
 import com.example.demo.entity.ResultVo;
 import com.example.demo.enum2.HttpStatusEnum;
+import com.example.demo.enum2.TopicConstants;
+import com.example.demo.utils.KafkaSender;
 import com.example.demo.utils.RedisUtil;
 import com.example.demo.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +40,10 @@ public class LoginController {
     @Resource
     private AuthenticationManager authenticationManager;
 
-    @Value("${spring.mail.username}")
-    private String emailfrom;
-
-    private static String creatNum;
-
     @Autowired
-    private RedisUtil redisUtil;
+    KafkaSender kafkaSender;
 
-    @Autowired
-    private JavaMailSender javaMailSender;
-
-    private static Long num = 0l;
+    private static final String prefix = "a/";
 
 
     @RequestMapping("/")
@@ -56,12 +53,12 @@ public class LoginController {
 
     @RequestMapping("/index")
     public String login(){
-        return "a/sign-in";
+        return prefix + "sign-in";
     }
 
     @GetMapping("home")
     public String home(){
-        return "a/home";
+        return prefix +"home";
     }
 
     @RequestMapping("/loginn")
@@ -85,22 +82,18 @@ public class LoginController {
 
     @GetMapping("/signup")
     public String signup(){
-        return "a/sign-up";
+        return prefix + "sign-up";
     }
 
     @PostMapping("/creatUser")
     @ResponseBody
     public ResultVo creatUser(@Validated @RequestBody MyUser user){
         try {
-            SimpleMailMessage msg = new SimpleMailMessage();
-            LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100);
-            msg.setFrom(emailfrom);
-            msg.setTo(user.getEmail());
-            msg.setSubject("***注册激活信息***");
-            Long countNum = num+1;
-            msg.setText("<html><body>恭喜你这个逼，你是第"+countNum+"个用户！验证码为："+lineCaptcha.getCode()+"</body></html>");
-            msg.setSentDate(new Date());
-            javaMailSender.send(msg);
+            //将数据添加到数据库
+            // .....
+
+            //消息队列发送邮件
+            kafkaSender.send(TopicConstants.EMAIL,user);
             return ResultVo.success();
         }catch (Exception e){
             e.printStackTrace();

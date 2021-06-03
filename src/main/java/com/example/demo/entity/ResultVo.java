@@ -4,6 +4,9 @@ import com.example.demo.enum2.HttpStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.jackson.JsonComponent;
+
+import java.io.Serializable;
 
 
 /**
@@ -14,7 +17,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResultVo <T>{
+@JsonComponent
+public class ResultVo <T>  {
 
     private Integer code;
 

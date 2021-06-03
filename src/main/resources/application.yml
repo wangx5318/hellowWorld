@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8089
 servlet:
   context-path: /
 
@@ -52,8 +52,26 @@ spring:
         smtp:
           socketFactoryClass: javax.net.ssl.SSLSocketFactory
           debug: true
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092    # kafka地址
+    consumer:
+      group-id: kafka # 分组ID
+      auto-offset-reset: earliest
+      auto-commit-interval: 100
+      enable-auto-commit: true #自动提交
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer #消费者 key-value序列化方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer #生产者 key-value序列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 
+baidu:   #百度ORC识别
+  appid: 24294671
+  key: FlGSAaKXGRvXzs4zDM3ZhCqT
+  secret: 9EWxn4a0Ha4cBf9UKXdBUEgnIDwUaLTn
+  front: front
+  back: back
 
 
 

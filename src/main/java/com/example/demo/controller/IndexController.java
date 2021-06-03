@@ -24,11 +24,11 @@ public class IndexController {
     RedisUtil redisUtil;
 
     public void setValToRedis(){
-        redisUtil.setStringValByKey("wx","王玄 !");
+        redisUtil.set("wx","王玄 !");
     }
 
     public String getValToRedis(){
-        return redisUtil.getStringValByKey("wx");
+        return (String)redisUtil.get("wx");
     }
 
     @GetMapping("/wx")

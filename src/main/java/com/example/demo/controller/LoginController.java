@@ -61,6 +61,11 @@ public class LoginController {
         return prefix +"home";
     }
 
+    @RequestMapping("mall")
+    public String mall(){
+        return prefix + "mall";
+    }
+
     @RequestMapping("/loginn")
     @ResponseBody
     public ResultVo loginn(@RequestBody MyUser myUser){

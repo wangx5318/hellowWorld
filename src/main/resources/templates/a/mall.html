@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="http://cdn.suoluomei.com/common/js2.0/axios/axios.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+
+<div id="mall">
+    <input type="text" name="keyword" v-model="keyword">
+    <input type="button" value="search" @click="search">
+    <input type="button" value="搜索前请先爬数据" @click="save">
+    <ul>
+        <li v-for="(item,i) in result">
+            <div>
+                <img :src="item.img">
+            </div>
+            <div class="price">
+                <strong>
+                    <i>{{item.price}}</i>
+                </strong>
+            </div>
+            <div class="title">
+                <span>{{item.title}}</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el : "#mall",
+        data : {
+            keyword : '',
+            result : [],
+            count : 0
+        },
+        methods : {
+            search : function () {
+                let keyword = this.keyword;
+                if(this.count == 0){
+                    this.$message.error('请先爬取数据！');
+                    return false;
+                }
+                if(!keyword){
+                    this.$message.error('请输入搜索条件！');
+                    return false;
+                }
+                axios.get("/product/search/" + keyword).then(res=>{
+                    if(parseInt(res.data.code) == 200){
+                        this.result = res.data.data;
+                    }
+                    console.log(res)
+                });
+            },
+            save : function () {
+                let keyword = this.keyword;
+                if(!keyword){
+                    this.$message.error('请在输入框输入爬取数据名称！');
+                    return false;
+                }
+                axios.get("/product/save/" + keyword).then(res=>{
+                    if(parseInt(res.data.code) == 200){
+                        this.count++;
+                        this.$message({
+                            message: '爬取成功!',
+                            type: 'success'
+                        });
+                    }else{
+                        this.$message.error('爬取失败！');
+                    }
+
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

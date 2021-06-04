@@ -24,6 +24,7 @@ spring:
     mode: HTML5
 
 
+
   mybatis-plus:
     configuration:
       map-underscore-to-camel-case: true
@@ -64,6 +65,11 @@ spring:
     producer:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer #生产者 key-value序列化方式
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+        cluster-nodes: localhost:9300
 
 
 baidu:   #百度ORC识别

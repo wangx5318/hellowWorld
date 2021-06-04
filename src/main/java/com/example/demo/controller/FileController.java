@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.CardEnum;
 import com.example.demo.entity.ResultVo;
 import com.example.demo.enum2.HttpStatusEnum;
 import com.example.demo.utils.BaiDuORCUtil;
@@ -75,22 +76,22 @@ public class FileController {
         while (it.hasNext()){
             String key = it.next().toString();
             JSONObject obj = (JSONObject)words.get(key);
-            map.put(changeKey(key),obj.get("words").toString());
+            map.put(CardEnum.getNameByCname(key),obj.get("words").toString());
         }
         return map;
     }
 
-    public String changeKey(String key){
-        String name = "";
-        switch (key){
-            case "姓名" : name = "name"; break;
-            case "民族" : name = "national";break;
-            case "住址" : name = "address";break;
-            case "公民身份号码" : name = "id";break;
-            case "出生" : name = "birthday";break;
-            case "性别" : name = "sex";break;
-        }
-        return name;
-    }
+//    public String changeKey(String key){
+//        String name = "";
+//        switch (key){
+//            case "姓名" : name = "name"; break;
+//            case "民族" : name = "national";break;
+//            case "住址" : name = "address";break;
+//            case "公民身份号码" : name = "id";break;
+//            case "出生" : name = "birthday";break;
+//            case "性别" : name = "sex";break;
+//        }
+//        return name;
+//    }
 
 }

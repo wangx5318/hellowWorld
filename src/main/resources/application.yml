@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8089
 servlet:
   context-path: /
 
@@ -14,6 +14,16 @@ spring:
     time-zone: GMT+8
     serialization:
       write-dates-as-timestamps: false
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    cache: false
+    mode: HTML5
+
+
 
   mybatis-plus:
     configuration:
@@ -32,3 +42,49 @@ spring:
         max-idle: 6 #最大空闲数
         max-active: 10 #最大连接数
         min-idle: 2 #最小空闲数
+  mail:
+    host: smtp.qq.com
+    username: 424253536@qq.com
+    password: lzlxxfupzfsybheh
+    port: 587
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+          debug: true
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092    # kafka地址
+    consumer:
+      group-id: kafka # 分组ID
+      auto-offset-reset: earliest
+      auto-commit-interval: 100
+      enable-auto-commit: true #自动提交
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer #消费者 key-value序列化方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer #生产者 key-value序列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+        cluster-nodes: localhost:9300
+
+
+baidu:   #百度ORC识别
+  appid: 24294671
+  key: FlGSAaKXGRvXzs4zDM3ZhCqT
+  secret: 9EWxn4a0Ha4cBf9UKXdBUEgnIDwUaLTn
+  front: front
+  back: back
+
+
+
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  #token有效期一天
+  expiration: 86400
+  tokenHead: "Bearer "

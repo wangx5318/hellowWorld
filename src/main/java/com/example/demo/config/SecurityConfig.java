@@ -59,7 +59,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(myAuthenticationEntryPoint)//自定义异常处理器
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index","/loginn","/signup","/creatUser","/file/getIdCardData","/product/**","/mall")//忽略请求路径，不需要认证
+                .antMatchers("/index","/loginn","/signup","/creatUser",
+                        "/file/getIdCardData","/product/**","/mall","/forgot")//忽略请求路径，不需要认证
                 .permitAll()
                 .anyRequest()
                 .authenticated()//除了上面忽略得，所有请求都要认证

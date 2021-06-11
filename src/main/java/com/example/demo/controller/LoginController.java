@@ -107,6 +107,11 @@ public class LoginController {
 
     }
 
+    @GetMapping("/forgot")
+    public String forget(){
+        return prefix + "forgot-password";
+    }
+
 
 
 }

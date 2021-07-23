@@ -6,6 +6,7 @@ import com.example.demo.common.BuniessException;
 import com.example.demo.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -21,4 +22,6 @@ public interface IUserService extends IService<User> {
     void addUser(User user) throws BuniessException;
 
     List<User> selectUser(User user);
+
+    void exportUser(HttpServletResponse response);
 }

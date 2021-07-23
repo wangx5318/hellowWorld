@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -51,6 +52,12 @@ public class UserController {
     @PostMapping("/selectUser")
     public List<User> selectUser(@RequestBody User user){
         return userService.selectUser(user);
+    }
+
+    @ApiOperation(value = "导出人员信息",notes = "无注意事项",httpMethod = "POST")
+    @PostMapping("/exportUser")
+    public void exportUser(HttpServletResponse response){
+        userService.exportUser(response);
     }
 
 }

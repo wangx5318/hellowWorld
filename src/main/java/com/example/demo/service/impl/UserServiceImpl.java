@@ -9,10 +9,12 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.demo.utils.ExcelUtil;
 import freemarker.template.utility.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -41,5 +43,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             query.like("name", user.getName());
         }
         return baseMapper.selectList(query);
+    }
+
+    @Override
+    public void exportUser(HttpServletResponse response) {
+        QueryWrapper<User> query = new QueryWrapper<>();
+        List<User> list = baseMapper.selectList(query);
+        ExcelUtil.exportExcel(list,"通讯录","技术部",User.class,"通讯录.xls",response);
     }
 }

@@ -22,13 +22,16 @@ public class ExcelUtil {
 
     public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response) {
         ExportParams exportParams = new ExportParams(title, sheetName);
+        exportParams.setStyle(ExcelStyleUtil.class);
         exportParams.setCreateHeadRows(isCreateHeader);
         defaultExport(list, pojoClass, fileName, response, exportParams);
 
     }
 
     public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, HttpServletResponse response) {
-        defaultExport(list, pojoClass, fileName, response, new ExportParams(title, sheetName));
+        ExportParams exportParams = new ExportParams(title, sheetName);
+        exportParams.setStyle(ExcelStyleUtil.class);
+        defaultExport(list, pojoClass, fileName, response, exportParams);
     }
 
     public static void exportExcel(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {

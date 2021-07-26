@@ -48,11 +48,11 @@ public class User implements Serializable {
     private Integer sex;
 
     @ApiModelProperty(value = "生日")
-    @Excel(name = "birthday", orderNum = "3")
+    @Excel(name = "birthday", orderNum = "3", exportFormat = "yyyy-mm-dd hh:mm:ss",width = 20)
     private Date birthday;
 
     @ApiModelProperty(value = "手机号码")
-    @Excel(name = "mobile", orderNum = "4")
+    @Excel(name = "mobile", orderNum = "4", width = 12)
     @JsonSerialize(using= ToStringSerializer.class)
     private String mobile;
 

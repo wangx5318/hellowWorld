@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.BuniessException;
 import com.example.demo.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -24,4 +25,6 @@ public interface IUserService extends IService<User> {
     List<User> selectUser(User user);
 
     void exportUser(HttpServletResponse response);
+
+    void importExcel(MultipartFile file);
 }

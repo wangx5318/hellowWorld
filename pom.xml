@@ -51,7 +51,7 @@
             <version>2.3.30</version>
         </dependency>
 
-        <!--工具-->
+        <!--工具 @Data注解-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

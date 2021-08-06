@@ -1,15 +1,12 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.City;
 import com.example.demo.mapper.CityMapper;
-import com.example.demo.service.ICityService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * <p>
@@ -20,9 +17,8 @@ import java.util.List;
  * @since 2021-04-12
  */
 @Service
-public class CityServiceImpl extends ServiceImpl<CityMapper, City> implements ICityService {
+public class CityService extends ServiceImpl<CityMapper, City>  {
 
-    @Override
     public IPage<City> findCity(City city) {
         QueryWrapper<City> query = new QueryWrapper<>();
         query.eq("CountryCode", city.getCountryCode());

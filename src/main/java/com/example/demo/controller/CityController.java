@@ -3,14 +3,12 @@ package com.example.demo.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.demo.entity.City;
-import com.example.demo.service.ICityService;
+import com.example.demo.service.CityService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import redis.clients.jedis.Jedis;
-
-import java.util.List;
 
 /**
  * <p>
@@ -26,7 +24,7 @@ import java.util.List;
 public class CityController {
 
     @Autowired
-    private ICityService cityService;
+    private CityService cityService;
 
     @ApiOperation(value = "查找城市",notes = "注意事项",httpMethod = "POST", response = City.class)
 //    @ApiImplicitParams({

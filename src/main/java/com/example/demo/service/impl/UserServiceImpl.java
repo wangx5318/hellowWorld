@@ -72,10 +72,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             ExcelImportResult<User> result = ExcelImportUtil.importExcelMore(file.getInputStream(), User.class, importParams);
             List<User> userList = result.getList();
             System.out.println(userList);
+            userList.forEach( e->{
+                if("陈佳".equals(e.getName())){
+                    throw new BuniessException("鸽子王");
+                }
+            });
         } catch (IOException e) {
             throw new BuniessException(e.getMessage());
         } catch (Exception e1) {
             throw new BuniessException(e1.getMessage());
         }
+
     }
 }

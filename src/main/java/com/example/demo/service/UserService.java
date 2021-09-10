@@ -10,13 +10,22 @@ import com.example.demo.common.BuniessException;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.utils.ExcelUtil;
+import com.example.demo.utils.FileUtil;
+import com.example.demo.utils.WorldUtil;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -74,6 +83,38 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         } catch (Exception e1) {
             throw new BuniessException(e1.getMessage());
         }
+    }
+
+    public void generateArchives(HttpServletRequest request, HttpServletResponse response) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("name","章狗");
+        params.put("sex","男");
+        params.put("nickName","吃屎狗");
+        WorldUtil.exportWord("world/archives.docx","D:/test","aaa.docx",params,request,response);
+    }
+
+    public void importArchives(MultipartFile file) throws Exception{
+        FileInputStream fis = new FileInputStream(FileUtil.multipartFileToFile(file));
+        XWPFDocument xdoc = new XWPFDocument(fis);
+        List<XWPFParagraph> paras = xdoc.getParagraphs();
+        for(XWPFParagraph p : paras)//遍历段落
+        {
+            //获取段落的级别
+            String jibie = p.getStyleID();
+            p.getParagraphText();
+            if(jibie!=null) {
+                if(jibie.equals("8")) {
+                    System.out.println(p.getParagraphText());
+                }else if(jibie.equals("9")) {
+                    System.out.println(p.getParagraphText());
+                }else if(jibie.equals("10")){       //判断的段落为标题
+                    System.out.println(p.getParagraphText());
+                }else {      //判断段落为正文
+                    System.out.println(p.getParagraphText());
+                }
+            }
+        }
+        fis.close();
 
     }
 }

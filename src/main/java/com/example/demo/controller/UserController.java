@@ -4,14 +4,22 @@ package com.example.demo.controller;
 import com.example.demo.common.BuniessException;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
+import com.example.demo.utils.WorldUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -65,5 +73,21 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "生成人员档案",notes = "无注意事项",httpMethod = "POST")
+    @PostMapping("/generateArchives")
+    public void generateArchives(HttpServletRequest request, HttpServletResponse response){
+        userService.generateArchives(request, response);
+    }
+
+    @ApiOperation(value = "导入人员档案",notes = "无注意事项",httpMethod = "POST")
+    @PostMapping("/importArchives")
+    public String importArchives(@RequestParam("file")MultipartFile file){
+        try {
+            userService.importArchives(file);
+            return "导入成功";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
 
 }

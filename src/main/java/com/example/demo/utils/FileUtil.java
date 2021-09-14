@@ -22,7 +22,6 @@ public class FileUtil {
             InputStream is = multipartFile.getInputStream();
             File file = new File(multipartFile.getOriginalFilename());
             inputStreamToFile(is, file);
-            is.close();
             return file;
         }
     }

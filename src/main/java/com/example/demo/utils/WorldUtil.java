@@ -2,7 +2,7 @@ package com.example.demo.utils;
 
 import cn.afterturn.easypoi.word.WordExportUtil;
 import com.baomidou.mybatisplus.core.toolkit.Assert;
-import com.sun.deploy.net.URLEncoder;
+import java.net.URLEncoder;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import javax.servlet.http.HttpServletRequest;

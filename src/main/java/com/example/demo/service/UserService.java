@@ -67,7 +67,6 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         //表头行数,默认1
         importParams.setTitleRows(1);
         //是否需要校验上传的Excel,默认false
-        importParams.setNeedVerfiy(false);
 
         try {
             ExcelImportResult<User> result = ExcelImportUtil.importExcelMore(file.getInputStream(), User.class, importParams);
@@ -90,7 +89,7 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         params.put("name","章狗");
         params.put("sex","男");
         params.put("nickName","吃屎狗");
-        WorldUtil.exportWord("world/archives.docx","D:/test","aaa.docx",params,request,response);
+        WorldUtil.exportWord("world/archives.docx","D:/test","章狗吃屎.docx",params,request,response);
     }
 
     public void importArchives(MultipartFile file) throws Exception{

@@ -8,7 +8,6 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import redis.clients.jedis.Jedis;
 
 /**
  * <p>
@@ -36,12 +35,12 @@ public class CityController {
         return cityService.findCity(city);
     }
 
-    @ApiOperation("redis测试")
-    @GetMapping("/redisTest")
-    public String redisTest(){
-        Jedis jedis = new Jedis("localhost",6379);
-        jedis.set("b", "阿斯顿");
-        return jedis.get("b");
-    }
+//    @ApiOperation("redis测试")
+//    @GetMapping("/redisTest")
+//    public String redisTest(){
+//        Jedis jedis = new Jedis("localhost",6379);
+//        jedis.set("b", "阿斯顿");
+//        return jedis.get("b");
+//    }
 
 }

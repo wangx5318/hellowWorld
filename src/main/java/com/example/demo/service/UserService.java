@@ -14,6 +14,7 @@ import com.example.demo.utils.FileUtil;
 import com.example.demo.utils.WorldUtil;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +39,18 @@ import java.util.Map;
 @Service
 public class UserService extends ServiceImpl<UserMapper, User>{
 
+
+    @Cacheable(value = "user",key = "#userId",unless = "#result==null")
+    public User findUserById(Long userId) {
+        return baseMapper.selectById(userId);
+    }
+
+
+    /**
+     * 添加人员
+     * @param user
+     * @throws BuniessException
+     */
     public void addUser(User user) throws BuniessException {
         if(StringUtils.isEmpty(user.getName())){
             throw new BuniessException("姓名为空");
@@ -45,6 +58,11 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         this.save(user);
     }
 
+    /**
+     * 条件查询人员
+     * @param user
+     * @return
+     */
     public List<User> selectUser(@RequestBody User user) {
         QueryWrapper<User> query = new QueryWrapper<>();
         if(StringUtils.isNotEmpty(user.getName())){
@@ -53,12 +71,20 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         return baseMapper.selectList(query);
     }
 
+    /**
+     * 导出人员excel
+     * @param response
+     */
     public void exportUser(HttpServletResponse response) {
         QueryWrapper<User> query = new QueryWrapper<>();
         List<User> list = baseMapper.selectList(query);
         ExcelUtil.exportExcel(list,"通讯录","技术部",User.class,"通讯录.xls",response);
     }
 
+    /**
+     * 导入excel
+     * @param file
+     */
     public void importExcel(MultipartFile file) {
         ImportParams importParams = new ImportParams();
         // 数据处理
@@ -84,6 +110,11 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         }
     }
 
+    /**
+     * 生成人员档案（word）
+     * @param request
+     * @param response
+     */
     public void generateArchives(HttpServletRequest request, HttpServletResponse response) {
         Map<String,Object> params = new HashMap<>();
         params.put("name","章狗");
@@ -92,6 +123,11 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         WorldUtil.exportWord("world/archives.docx","D:/test","章狗吃屎.docx",params,request,response);
     }
 
+    /**
+     * 导入人员档案（word）
+     * @param file
+     * @throws Exception
+     */
     public void importArchives(MultipartFile file) throws Exception{
         FileInputStream fis = new FileInputStream(FileUtil.multipartFileToFile(file));
         XWPFDocument xdoc = new XWPFDocument(fis);
@@ -116,4 +152,5 @@ public class UserService extends ServiceImpl<UserMapper, User>{
         fis.close();
 
     }
+
 }

@@ -38,6 +38,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @ApiOperation(value = "根据id查询用户，先从redis获取",notes = "无注意事项",httpMethod = "POST")
+    @PostMapping("/findUserById")
+    public User findUserById(Long userId){
+        return userService.findUserById(userId);
+    }
+
     @ApiOperation(value = "新增用户",notes = "无注意事项",httpMethod = "POST")
     @PostMapping("/addUser")
     public String addUser(@RequestBody User user){
